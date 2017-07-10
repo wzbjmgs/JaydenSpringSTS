@@ -4,6 +4,8 @@ target/
 /.idea/
 /.mvn/
 /target/
+.idea/workspace.xml
+
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
