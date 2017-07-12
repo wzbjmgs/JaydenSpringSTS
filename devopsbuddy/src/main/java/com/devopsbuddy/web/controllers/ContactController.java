@@ -1,8 +1,12 @@
 package com.devopsbuddy.web.controllers;
 
+import com.devopsbuddy.backend.service.EmailService;
 import com.devopsbuddy.web.domain.frontend.FeedBackPojo;
+import org.hibernate.validator.constraints.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +26,9 @@ public class ContactController {
 
     private static final String CONTACT_US_VIEW_NAME = "contact/contact";
 
+    @Autowired
+    public EmailService emailService;
+
     @GetMapping("/contact")
     public String contactGet(ModelMap model){
         FeedBackPojo feedBackPojo = new FeedBackPojo();
@@ -32,6 +39,8 @@ public class ContactController {
     @PostMapping("/contact")
     public String contactPost(@ModelAttribute(FEEDBACK_MODEL_KEY) FeedBackPojo feedback){
         LOG.debug("Feedback POJO content: {}", feedback);
+//        LOG.debug("User.home path: {}", System.getProperty("user.home"));
+        emailService.sendFeedbackEmail(feedback);
         return ContactController.CONTACT_US_VIEW_NAME;
     }
 
