@@ -63,6 +63,9 @@ public class User implements Serializable, UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<UserRole>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<PasswordRestToken> passwordRestTokens = new HashSet<PasswordRestToken>();
+
     public long getId() {
         return id;
     }
@@ -195,6 +198,14 @@ public class User implements Serializable, UserDetails {
 
     public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public Set<PasswordRestToken> getPasswordRestTokens() {
+        return passwordRestTokens;
+    }
+
+    public void setPasswordRestTokens(Set<PasswordRestToken> passwordRestTokens) {
+        this.passwordRestTokens = passwordRestTokens;
     }
 
     @Override
