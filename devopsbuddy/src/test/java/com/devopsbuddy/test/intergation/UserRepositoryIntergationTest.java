@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import static com.devopsbuddy.enums.PlanEnum.*;
 
@@ -28,7 +29,7 @@ import static com.devopsbuddy.enums.PlanEnum.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserIntergationTest extends AbstractIntegerationTest{
+public class UserRepositoryIntergationTest extends AbstractIntegerationTest{
 
     /*Get method return test name;*/
     @Rule public TestName testName = new TestName();
@@ -86,5 +87,28 @@ public class UserIntergationTest extends AbstractIntegerationTest{
         User basicUser = createUser(username,email);
         userRepository.delete(basicUser.getId());
 
+    }
+
+    @Test
+    public void testGetUserByEmail(){
+        User user = createUser(testName);
+
+        User newlyFoundUser = userRepository.findByEmail(user.getEmail());
+        Assert.assertNotNull(newlyFoundUser);
+        Assert.assertNotNull(newlyFoundUser.getId());
+    }
+
+    @Test
+    public void testUpdateUserPassword(){
+        User user = createUser(testName);
+        Assert.assertNotNull(user);
+        Assert.assertNotNull(user.getId());
+
+        String newPassword = UUID.randomUUID().toString();
+
+        userRepository.updateUserPassword(user.getId(),newPassword);
+
+        user = userRepository.findOne(user.getId());
+        Assert.assertEquals(newPassword,user.getPassword());
     }
 }

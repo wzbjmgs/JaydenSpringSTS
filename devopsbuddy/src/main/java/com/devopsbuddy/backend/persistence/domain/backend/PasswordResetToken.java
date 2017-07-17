@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
  * Created by Jayden on 7/17/2017.
  */
 @Entity
-public class PasswordRestToken implements Serializable{
+public class PasswordResetToken implements Serializable{
 
     /** The Serial Version UID for serializable classes **/
     private static final long serialVersionUID = 1L;
 
     /**The application logger**/
-    private static final Logger LOG = LoggerFactory.getLogger(PasswordRestToken.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PasswordResetToken.class);
 
     private final static int DEFAULT_TOKEN_LENGHT_IN_MINUTES = 120;
 
@@ -37,10 +37,10 @@ public class PasswordRestToken implements Serializable{
     @Convert(converter = LocalDateTimeAttributeConverter.class)
     private LocalDateTime expiryDate;
 
-    public PasswordRestToken() {
+    public PasswordResetToken() {
     }
 
-    public PasswordRestToken(String token, User user, LocalDateTime creationDateTime, int expirationInMinutes){
+    public PasswordResetToken(String token, User user, LocalDateTime creationDateTime, int expirationInMinutes){
         if((null == token) || (null == user) || (null == creationDateTime)){
             throw new IllegalArgumentException("token, user and creation date time can't be null");
         }
@@ -94,7 +94,7 @@ public class PasswordRestToken implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PasswordRestToken that = (PasswordRestToken) o;
+        PasswordResetToken that = (PasswordResetToken) o;
 
         return id == that.id;
     }

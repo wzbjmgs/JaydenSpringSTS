@@ -3,7 +3,6 @@ package com.devopsbuddy.backend.persistence.domain.backend;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -64,7 +63,7 @@ public class User implements Serializable, UserDetails {
     private Set<UserRole> userRoles = new HashSet<UserRole>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<PasswordRestToken> passwordRestTokens = new HashSet<PasswordRestToken>();
+    private Set<PasswordResetToken> passwordRestTokens = new HashSet<PasswordResetToken>();
 
     public long getId() {
         return id;
@@ -200,11 +199,11 @@ public class User implements Serializable, UserDetails {
         this.userRoles = userRoles;
     }
 
-    public Set<PasswordRestToken> getPasswordRestTokens() {
+    public Set<PasswordResetToken> getPasswordRestTokens() {
         return passwordRestTokens;
     }
 
-    public void setPasswordRestTokens(Set<PasswordRestToken> passwordRestTokens) {
+    public void setPasswordRestTokens(Set<PasswordResetToken> passwordRestTokens) {
         this.passwordRestTokens = passwordRestTokens;
     }
 

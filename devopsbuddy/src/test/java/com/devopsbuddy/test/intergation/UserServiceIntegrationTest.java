@@ -24,23 +24,13 @@ import java.util.Set;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserServiceIntegrationTest {
-
-    @Autowired
-    private UserService userService;
+public class UserServiceIntegrationTest extends AbstractServiceIntegrationTest{
 
     @Rule public TestName testName = new TestName();
 
     @Test
     public void testCreateNewUser() throws Exception{
-        String username = testName.getMethodName();
-        String email =testName.getMethodName() + "@devopsBuddy.com";
-
-        Set<UserRole> userRoles = new HashSet<UserRole>();
-        User basicUser = UserUtils.createBasicUser(username,email);
-        userRoles.add(new UserRole(basicUser, new Role(RolesEnums.BASIC)));
-
-        User user = userService.createUser(basicUser, PlanEnum.BASIC, userRoles);
+        User user = createUser(testName);
         Assert.assertNotNull(user);
         Assert.assertNotNull(user.getId());
     }
