@@ -6,7 +6,10 @@
     <!-- Bootstrap core CSS -->
     <link th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
     <!--Custom styles for this template-->
-    <link th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
+    <link type="text/css" th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
+
+    <!--FormValidation CSS-->
+    <link type="text/css" th:href="@{/css/formValidation.min.css}" rel="stylesheet" media="screen" />
 
 </head>
 
@@ -14,5 +17,9 @@
         <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
         <script th:src="@{/js/devopsbuddy.js}" ></script>
+
+        <!--FormValidation js-->
+        <script th:src="@{/js/formValidation.min.js}" ></script>
+        <script th:src="@{/js/bootstrap.min.js}" ></script>
     </div>
 </html>
