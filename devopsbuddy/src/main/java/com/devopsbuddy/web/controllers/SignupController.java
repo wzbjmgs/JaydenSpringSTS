@@ -153,9 +153,6 @@ public class SignupController {
             registeredUser = userService.createUser(user, PlanEnum.BASIC, roles);
         } else {
             roles.add(new UserRole(user, new Role(RolesEnums.PRO)));
-            registeredUser = userService.createUser(user, PlanEnum.PRO, roles);
-
-            // Extra precaution in case the POST method is invoked programmatically
             if (StringUtils.isEmpty(payload.getCardCode()) ||
                     StringUtils.isEmpty(payload.getCardNumber()) ||
                     StringUtils.isEmpty(payload.getCardMonth()) ||
@@ -166,6 +163,10 @@ public class SignupController {
                 return SUBSCRIPTION_VIEW_NAME;
 
             }
+            registeredUser = userService.createUser(user, PlanEnum.PRO, roles);
+
+            // Extra precaution in case the POST method is invoked programmatically
+
         }
             Authentication auth = new UsernamePasswordAuthenticationToken(
                     registeredUser, null, registeredUser.getAuthorities());
