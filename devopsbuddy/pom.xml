@@ -107,6 +107,13 @@
 			<version>LATEST</version>
 		</dependency>
 
+		<!--Stripe Dependencies-->
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>LATEST</version>
+		</dependency>
+
 		<!-- Test dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
