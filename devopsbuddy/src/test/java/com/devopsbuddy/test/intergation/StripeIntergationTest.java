@@ -2,6 +2,7 @@ package com.devopsbuddy.test.intergation;
 
 import com.devopsbuddy.backend.service.StripeService;
 import com.devopsbuddy.enums.PlanEnum;
+import com.devopsbuddy.utils.StripeUtils;
 import com.stripe.Stripe;
 import com.stripe.model.Customer;
 import org.junit.Assert;
@@ -54,10 +55,10 @@ public class StripeIntergationTest {
     public void createStripeCustomer() throws Exception{
         Map<String, Object> tokenParams = new HashMap<String, Object>();
         Map<String, Object> cardParams = new HashMap<String, Object>();
-        cardParams.put("number", TEST_CC_NUMBER);
-        cardParams.put("exp_month", TEST_CC_EXP_MONTH);
-        cardParams.put("exp_year", LocalDate.now(Clock.systemUTC()).getYear() + 1);
-        cardParams.put("cvc", TEST_CC_CVC_NBR);
+        cardParams.put(StripeUtils.STRIPE_CARD_NUMBER_KEY, TEST_CC_NUMBER);
+        cardParams.put(StripeUtils.STRIPE_EXPIRY_MONTH_KEY, TEST_CC_EXP_MONTH);
+        cardParams.put(StripeUtils.STRIPE_EXPIRY_YEAR_KEY, LocalDate.now(Clock.systemUTC()).getYear() + 1);
+        cardParams.put(StripeUtils.STRIPE_CVC_KEY, TEST_CC_CVC_NBR);
         tokenParams.put("card", cardParams);
 
         Map<String, Object> customerParams = new HashMap<>();
