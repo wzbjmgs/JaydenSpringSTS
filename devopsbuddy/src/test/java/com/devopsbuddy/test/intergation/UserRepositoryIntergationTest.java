@@ -73,6 +73,7 @@ public class UserRepositoryIntergationTest extends AbstractIntegerationTest{
         Assert.assertNotNull(newLyCreateUser.getPlan());
         Assert.assertNotNull(newLyCreateUser.getPlan().getId());
         Set<UserRole> newLyCreateUserUserRoles = newLyCreateUser.getUserRoles();
+        userRepository.delete(basicUser.getId());
         for(UserRole ur: newLyCreateUserUserRoles){
             Assert.assertNotNull(ur.getRole());
             Assert.assertNotNull(ur.getRole().getId());
@@ -94,6 +95,7 @@ public class UserRepositoryIntergationTest extends AbstractIntegerationTest{
         User user = createUser(testName);
 
         User newlyFoundUser = userRepository.findByEmail(user.getEmail());
+        userRepository.delete(user.getId());
         Assert.assertNotNull(newlyFoundUser);
         Assert.assertNotNull(newlyFoundUser.getId());
     }
@@ -109,6 +111,8 @@ public class UserRepositoryIntergationTest extends AbstractIntegerationTest{
         userRepository.updateUserPassword(user.getId(),newPassword);
 
         user = userRepository.findOne(user.getId());
+        userRepository.delete(user.getId());
         Assert.assertEquals(newPassword,user.getPassword());
+
     }
 }

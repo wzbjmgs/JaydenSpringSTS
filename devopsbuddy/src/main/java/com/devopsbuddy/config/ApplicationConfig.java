@@ -22,8 +22,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages="com.devopsbuddy.backend.persistence.repositories")
 @EntityScan(basePackages="com.devopsbuddy.backend.persistence.domain.backend")
 @EnableTransactionManagement
-@PropertySource("file:${user.home}/Documents/Udemy/fullStack/devopsBuddy/application-common.properties")
-@PropertySource("file:${user.home}/Documents/Udemy/fullStack/devopsBuddy/stripe.properties")
+@PropertySource("file:${user.home}/.devopsbuddy/application-common.properties")
+@PropertySource("file:${user.home}/.devopsbuddy/application-common.properties")
+@PropertySource("file:${user.home}/.devopsbuddy/stripe.properties")
 public class ApplicationConfig {
 
     @Value("${aws.s3.profile}")

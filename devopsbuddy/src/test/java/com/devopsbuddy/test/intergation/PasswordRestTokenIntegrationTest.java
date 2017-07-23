@@ -58,6 +58,7 @@ public class PasswordRestTokenIntegrationTest extends AbstractIntegerationTest{
         PasswordResetToken passwordRestToken = createPasswordResetToken(token, user, now);
 
         LocalDateTime actualTime = passwordRestToken.getExpiryDate();
+        userRepository.delete(user.getId());
         Assert.assertNotNull(actualTime);
         Assert.assertEquals(actualTime,expectedTime);
     }
@@ -71,6 +72,7 @@ public class PasswordRestTokenIntegrationTest extends AbstractIntegerationTest{
         createPasswordResetToken(token, user, now);
 
         PasswordResetToken retrievePasswordRestToken = passwordRestTokenRepository.findByToken(token);
+        userRepository.delete(user.getId());
         Assert.assertNotNull(retrievePasswordRestToken);
         Assert.assertNotNull(retrievePasswordRestToken.getId());
         Assert.assertNotNull(retrievePasswordRestToken.getUser());
@@ -87,6 +89,7 @@ public class PasswordRestTokenIntegrationTest extends AbstractIntegerationTest{
         passwordRestTokenRepository.delete(tokenId);
 
         PasswordResetToken shouldNotExistToken = passwordRestTokenRepository.findOne(tokenId);
+        userRepository.delete(user.getId());
         Assert.assertNull(shouldNotExistToken);
     }
 
@@ -125,6 +128,7 @@ public class PasswordRestTokenIntegrationTest extends AbstractIntegerationTest{
         Assert.assertTrue(actualTokens.size() == tokens.size());
         List<String> tokenAsList = tokens.stream().map(prt->prt.getToken()).collect(Collectors.toList());
         List<String> actualTokensAsList = actualTokens.stream().map(prt->prt.getToken()).collect(Collectors.toList());
+        userRepository.delete(user.getId());
         Assert.assertEquals(tokenAsList, actualTokensAsList);
 
     }

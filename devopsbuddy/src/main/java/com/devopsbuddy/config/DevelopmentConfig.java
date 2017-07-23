@@ -16,7 +16,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @Profile("dev")
-@PropertySource("file:${user.home}/Documents/Udemy/fullStack/devopsBuddy/application-dev.properties")
+@PropertySource("file:${user.home}/.devopsbuddy/application-dev.properties")
 public class DevelopmentConfig {
 
     @Value("${stripe.test.private.key}")

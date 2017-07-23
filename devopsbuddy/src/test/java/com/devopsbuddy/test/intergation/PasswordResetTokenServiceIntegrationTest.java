@@ -2,6 +2,7 @@ package com.devopsbuddy.test.intergation;
 
 import com.devopsbuddy.backend.persistence.domain.backend.PasswordResetToken;
 import com.devopsbuddy.backend.persistence.domain.backend.User;
+import com.devopsbuddy.backend.persistence.repositories.UserRepository;
 import com.devopsbuddy.backend.service.PasswordResetTokenService;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -22,12 +23,16 @@ public class PasswordResetTokenServiceIntegrationTest extends AbstractServiceInt
     @Autowired
     private PasswordResetTokenService passwordRestTokenService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Rule public TestName testName = new TestName();
 
     @Test
     public void testCreateNewTokenForUserEmail() throws Exception{
         User user = createUser(testName);
         PasswordResetToken passwordRestToken = passwordRestTokenService.createPasswordResetTokenForEmail(user.getEmail());
+        userRepository.delete(user.getId());
         Assert.assertNotNull(passwordRestToken);
         Assert.assertNotNull(passwordRestToken.getToken());
     }
@@ -41,6 +46,7 @@ public class PasswordResetTokenServiceIntegrationTest extends AbstractServiceInt
         Assert.assertNotNull(passwordRestToken.getToken());
 
         PasswordResetToken token = passwordRestTokenService.findByToken(passwordRestToken.getToken());
+        userRepository.delete(user.getId());
         Assert.assertNotNull(token);
     }
 }
